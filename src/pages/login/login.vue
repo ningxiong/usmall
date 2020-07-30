@@ -36,7 +36,6 @@ export default {
         if (Object.keys(this.data()).length != 0) {
           if (this.data().code === 200) {
             successAlert(this.data().msg);
-            localStorage.setItem("islogin", 1);
             this.$router.push("/index");
             clearTimeout(time);
           } else {
@@ -44,6 +43,7 @@ export default {
             clearTimeout(time);
           }
         } else {
+          clearTimeout(time);
           return;
         }
       }, 500);

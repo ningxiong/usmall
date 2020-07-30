@@ -8,7 +8,7 @@
         plain
         icon="el-icon-close"
         size="mini"
-        style="font-size:16px;padding:5px" @click="$router.push('/login')"
+        style="font-size:16px;padding:5px" @click="exit"
       >退出</el-button>
     </span>
   </div>
@@ -26,13 +26,14 @@ export default {
     };
   },
   mounted() {
-    if (Object.keys(this.data()).length == 0) {
-      this.$router.push('/login')
-      return
-    } else {
       this.username = this.data().list.username;
-    }
   },
+  methods:{
+    exit(){
+      this.data = ''
+      this.$router.push('/login')
+    }
+  }
 };
 </script>
 

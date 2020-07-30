@@ -23,7 +23,7 @@ export default {
     show() {
       this.info.title = "菜单管理";
       this.info.show = true;
-      this.info.isAdd = true;
+      this.info.isAdd = true; 
     },
     edit(id){
       this.info.title = "菜单编辑";

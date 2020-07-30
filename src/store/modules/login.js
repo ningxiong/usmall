@@ -1,12 +1,13 @@
 import { requestGuanliyuanLogin } from '../../utils/request'
 
 const state = {
-    data : {},
+    data : sessionStorage.getItem('user')?JSON.parse(sessionStorage.getItem("user")):null
 }
 
 const mutations = {
     changeData(state, json) {
         state.data = json
+        sessionStorage.setItem('user',JSON.stringify(json))
     },
 
 }

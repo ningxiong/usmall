@@ -1,9 +1,27 @@
 import axios from 'axios'
 import qs from 'qs'
+import store from '../store/modules/login'
+import {warningAlert} from './alert'
+import router from '../router'
+
+axios.interceptors.request.use(config=>{
+    if(config.url!= baseUrl+'/api/userlogin'){
+        config.headers.authorization = store.state.data.list.token
+    }
+    return config
+})
+
 
 axios.interceptors.response.use(res=>{
     console.log('本次请求地址是'+res.config.url)
     console.log(res)
+
+    if(res.data.msg === '登录已过期或访问权限受限'){
+        warningAlert('登录已过期或访问权限受限')
+        router.push('/login')
+        return
+    }
+
     return res
 })
 
@@ -266,6 +284,197 @@ export const requestRulesEdit = (params)=>{
 export const requestRulesDel = (params)=>{
     return axios({
         url:baseUrl+'/api/specsdelete',
+        method:"post",
+        data:qs.stringify(params)
+    })
+}
+
+
+//会员列表
+export const requestHuiyuanList = (params)=>{
+    return axios({
+        url:baseUrl+'/api/memberlist',
+        method:"get",
+    })
+}
+
+//会员请求一条数据
+export const requestHuiyuanDetail = (params)=>{
+    return axios({
+        url:baseUrl+'/api/memberinfo',
+        method:"get",
+        params
+    })
+}
+
+//会员修改
+export const requestHuiyuanEdit = (params)=>{
+    return axios({
+        url:baseUrl+'/api/memberedit',
+        method:"post",
+        data:qs.stringify(params)
+    })
+}
+
+
+
+//商品管理添加
+export const requestGuanliAdd = (params)=>{
+    var formData = new FormData()
+    for(let i in params){
+        formData.append(i,params[i])
+    }
+    return axios({
+        url:baseUrl+'/api/goodsadd',
+        method:"post",
+        data:formData
+    })
+}
+
+//商品管理总数
+export const requestGuanliCount = ()=>{
+    return axios({
+        url:baseUrl+'/api/goodscount',
+        method:"get",
+    })
+}
+
+//商品管理列表
+export const requestGuanliList = (params)=>{
+    return axios({
+        url:baseUrl+'/api/goodslist',
+        method:"get",
+        params
+    })
+}
+
+//商品管理请求一条数据
+export const requestGuanliDetail = (params)=>{
+    return axios({
+        url:baseUrl+'/api/goodsinfo',
+        method:"get",
+        params
+    })
+}
+
+//商品管理修改
+export const requestGuanliEdit = (params)=>{
+    var formData = new FormData()
+    for(let i in params){
+        formData.append(i,params[i])
+    }
+    return axios({
+        url:baseUrl+'/api/goodsedit',
+        method:"post",
+        data:formData
+    })
+}
+
+//商品管理删除
+export const requestGuanliDel = (params)=>{
+    return axios({
+        url:baseUrl+'/api/goodsdelete',
+        method:"post",
+        data:qs.stringify(params)
+    })
+}
+
+
+
+
+//轮播图添加
+export const requestBannerAdd = (params)=>{
+    var formData = new FormData()
+    for(let i in params){
+        formData.append(i,params[i])
+    }
+    return axios({
+        url:baseUrl+'/api/banneradd',
+        method:"post",
+        data:formData
+    })
+}
+
+//轮播图列表
+export const requestBannerList = ()=>{
+    return axios({
+        url:baseUrl+'/api/bannerlist',
+        method:"get",
+    })
+}
+
+//轮播图请求一条数据
+export const requestBannerDetail = (params)=>{
+    return axios({
+        url:baseUrl+'/api/bannerinfo',
+        method:"get",
+        params
+    })
+}
+
+//轮播图修改时
+export const requestBannerEdit = (params)=>{
+    var formData = new FormData()
+    for(let i in params){
+        formData.append(i,params[i])
+    }
+    return axios({
+        url:baseUrl+'/api/banneredit',
+        method:"post",
+        data:formData
+    })
+}
+
+//轮播图删除
+export const requestBannerDel = (params)=>{
+    return axios({
+        url:baseUrl+'/api/bannerdelete',
+        method:"post",
+        data:qs.stringify(params)
+    })
+}
+
+
+
+//秒杀活动添加
+export const requestMiaoshaAdd = (params)=>{
+    return axios({
+        url:baseUrl+'/api/seckadd',
+        method:"post",
+        data:qs.stringify(params)
+    })
+}
+
+//秒杀活动列表
+export const requestMiaoshaList = ()=>{
+    return axios({
+        url:baseUrl+'/api/secklist',
+        method:"get",
+    })
+}
+
+//秒杀活动请求一条数据
+export const requestMiaoshaDetail = (params)=>{
+    return axios({
+        url:baseUrl+'/api/seckinfo',
+        method:"get",
+        params
+    })
+}
+
+//秒杀活动修改时
+export const requestMiaoshaEdit = (params)=>{
+    return axios({
+        url:baseUrl+'/api/seckedit',
+        method:"post",
+        data:qs.stringify(params)
+    })
+}
+
+//秒杀活动删除
+export const requestMiaoshaDel = (params)=>{
+    return axios({
+        url:baseUrl+'/api/seckdelete',
         method:"post",
         data:qs.stringify(params)
     })

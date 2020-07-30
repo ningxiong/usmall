@@ -55,19 +55,3 @@ export default {
 }
 </style>
 
-/* children: Array(3)
-icon: "el-icon-setting"
-id: 30
-pid: 0
-status: 1
-title: "系统设置"
-type: 1
-url: "" */
-
-/* icon: ""
-id: 31
-pid: 30
-status: 1
-title: "菜单管理"
-type: 2
-url: "/index/caidan" */

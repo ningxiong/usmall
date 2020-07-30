@@ -1,4 +1,4 @@
-import { requestRulesList, requestRulesCount } from '../../utils/request'
+import { requestGuanliCount, requestGuanliList } from '../../utils/request'
 
 const state = {
     list: [],
@@ -9,9 +9,6 @@ const state = {
 
 const mutations = {
     changeList(state, arr) {
-        arr.forEach(i => {
-            i.attrs = JSON.parse(i.attrs)
-        });
         state.list = arr
     },
     changePage(state, page) {
@@ -32,8 +29,9 @@ const actions = {
                 page: context.state.page
             }
         }
-        requestRulesList(params).then(res => {
-            if (res.data.list.length == 0 && context.state.page > 1) {
+
+        requestGuanliList(params).then(res => {
+            if (!res.data.list && context.state.page > 1) {
                 context.commit('changePage', context.state.page - 1)
                 context.dispatch('changeListAc')
                 return
@@ -45,7 +43,7 @@ const actions = {
         context.commit('changePage', page)
     },
     changeCountAc(context) {
-        requestRulesCount().then(res => {
+        requestGuanliCount().then(res => {
             context.commit('changeCount', res.data.list[0].total)
         })
     }

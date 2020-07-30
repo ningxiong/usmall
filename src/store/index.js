@@ -10,6 +10,10 @@ import guanliyuan from './modules/guanliyuan'
 import login from './modules/login'
 import fenlei from './modules/fenlei'
 import rules from './modules/rules'
+import huiyuan from './modules/huiyuan'
+import guanli from './modules/guanli'
+import banner from './modules/banner'
+import miaosha from './modules/miaosha'
 
 export default new Vuex.Store({
     state,
@@ -22,6 +26,10 @@ export default new Vuex.Store({
         guanliyuan,
         login,
         fenlei,
-        rules
+        rules,
+        huiyuan,
+        guanli,
+        banner,
+        miaosha,
     }
 })
