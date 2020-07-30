@@ -153,6 +153,26 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.title)) {
+        warningAlert("请输入秒杀活动名称");
+        return;
+      }
+      if (this.timeArr.length == 0) {
+        warningAlert("请选择活动日期");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.first_cateid)) {
+        warningAlert("请选择一级分类");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.second_cateid)) {
+        warningAlert("请选择二级分类");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.goodsid)) {
+        warningAlert("请选择商品");
+        return;
+      }
       this.form.begintime = this.timeArr[0].getTime();
       this.form.endtime = this.timeArr[1].getTime();
       requestMiaoshaAdd(this.form).then((res) => {
@@ -183,6 +203,14 @@ export default {
       });
     },
     update() {
+      if (!this.$regBlank.test(this.form.title)) {
+        warningAlert("请输入秒杀活动名称");
+        return;
+      }
+      if (!this.timeArr) {
+        warningAlert("请选择活动日期");
+        return;
+      }
       this.form.begintime = this.timeArr[0].getTime();
       this.form.endtime = this.timeArr[1].getTime();
       requestMiaoshaEdit(this.form).then((res) => {

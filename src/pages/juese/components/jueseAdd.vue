@@ -55,7 +55,7 @@ export default {
         children: "children",
         label: "title",
       },
-      keys: "",
+      keys: [],
     };
   },
   computed: {
@@ -84,6 +84,10 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.rolename)) {
+        warningAlert("请输入角色名称");
+        return;
+      }
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
       requestJueseAdd(this.form).then((res) => {
         if (res.data.code == 200) {
@@ -113,7 +117,10 @@ export default {
       });
     },
     update() {
-      // console.log(this.form)
+      if (!this.$regBlank.test(this.form.rolename)) {
+        warningAlert("不能修改空白角色名称");
+        return;
+      }
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
       requestJueseEdit(this.form).then((res) => {
         if (res.data.code == 200) {

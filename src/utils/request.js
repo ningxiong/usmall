@@ -25,7 +25,7 @@ axios.interceptors.response.use(res=>{
     return res
 })
 
-const baseUrl = '/api'
+const baseUrl = ''
 
 //菜单添加
 export const requestCaidanList = (params)=>{

@@ -7,7 +7,11 @@ const state = {
 const mutations = {
     changeData(state, json) {
         state.data = json
-        sessionStorage.setItem('user',JSON.stringify(json))
+        if(json){
+            sessionStorage.setItem('user',JSON.stringify(json))
+        }else{
+            sessionStorage.removeItem('user')
+        }
     },
 
 }

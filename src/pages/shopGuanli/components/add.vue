@@ -36,7 +36,6 @@
           <el-input v-model="form.market_price"></el-input>
         </el-form-item>
         <el-form-item label="图片" label-width="80px">
-          <!-- :on-change="changeImg" -->
           <el-upload class="avatar-uploader" action :show-file-list="false" :on-change="changeImg">
             <img v-if="imageUrl" :src="imageUrl" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -214,6 +213,38 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.first_cateid)) {
+        warningAlert("请选择一级分类");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.second_cateid)) {
+        warningAlert("请选择二级分类");
+        return;
+      }
+       if (!this.$regBlank.test(this.form.goodsname)) {
+        warningAlert("请输入商品名称");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.price)) {
+        warningAlert("请输入价格");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.market_price)) {
+        warningAlert("请输入市场价格");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.img)) {
+        warningAlert("请上传图片");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.specsid)) {
+        warningAlert("请选择商品规格");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.specsattr)) {
+        warningAlert("请选择规格属性");
+        return;
+      }
       this.form.description = this.editor2.txt.html();
       this.form.specsattr = JSON.stringify(this.form.specsattr);
       requestGuanliAdd(this.form).then((res) => {
@@ -245,6 +276,22 @@ export default {
       });
     },
     update() {
+      if (!this.$regBlank.test(this.form.goodsname)) {
+        warningAlert("请输入商品名称");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.price)) {
+        warningAlert("请输入价格");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.market_price)) {
+        warningAlert("请输入市场价格");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.img)) {
+        warningAlert("请上传图片");
+        return;
+      }
       this.form.description = this.editor2.txt.html();
       this.form.specsattr = JSON.stringify(this.form.specsattr);
       requestGuanliEdit(this.form).then((res) => {

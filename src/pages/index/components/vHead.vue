@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters,mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -29,8 +29,11 @@ export default {
       this.username = this.data().list.username;
   },
   methods:{
+    ...mapMutations({
+      changeData:'login/changeData'
+    }),
     exit(){
-      this.data = ''
+      this.changeData(null)
       this.$router.push('/login')
     }
   }

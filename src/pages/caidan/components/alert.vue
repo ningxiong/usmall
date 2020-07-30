@@ -98,6 +98,21 @@ export default {
       changeCaidanAc: "caidan/changeCaidanAc",
     }),
     add() {
+      if (!this.$regBlank.test(this.form.title)) {
+        warningAlert("请输入标题");
+        return;
+      }
+      if (this.form.type == 1) {
+        if (!this.$regBlank.test(this.form.icon)) {
+          warningAlert("请选择图标");
+          return;
+        }
+      }else{
+        if (!this.$regBlank.test(this.form.url)) {
+          warningAlert("请选择地址");
+          return;
+        }
+      }
       requestCaidanList(this.form).then((res) => {
         if (res.data.code == 200) {
           this.info.show = false;

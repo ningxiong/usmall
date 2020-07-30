@@ -98,6 +98,13 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.title)) {
+        warningAlert("请输入标题");
+        return;
+      } else if (!this.$regBlank.test(this.form.img)) {
+        warningAlert("请上传图片");
+        return;
+      }
       requestBannerAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -127,6 +134,10 @@ export default {
       });
     },
     update() {
+      if (!this.$regBlank.test(this.form.title)) {
+        warningAlert("请输入标题");
+        return;
+      }
       requestBannerEdit(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

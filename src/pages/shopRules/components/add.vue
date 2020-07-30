@@ -83,6 +83,10 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.specsname)) {
+        warningAlert("请输入规格名称");
+        return;
+      }
       if (this.attrArr.some((item) => item.value == "")) {
         warningAlert("属性规格均不能为空");
         return;
@@ -115,6 +119,14 @@ export default {
       });
     },
     update() {
+      if (!this.$regBlank.test(this.form.specsname)) {
+        warningAlert("不能设置规格名称");
+        return;
+      }
+      if (this.attrArr.some((item) => item.value == "")) {
+        warningAlert("属性规格均不能为空");
+        return;
+      }
       this.form.attrs = JSON.stringify(this.attrArr.map((item) => item.value));
       requestRulesEdit(this.form).then((res) => {
         if (res.data.code == 200) {

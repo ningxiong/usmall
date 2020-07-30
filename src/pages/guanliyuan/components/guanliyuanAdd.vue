@@ -86,6 +86,18 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.username)) {
+        warningAlert("请输入用户名");
+        return;
+      }
+      if (!this.$regBlank.test(this.form.password)) {
+        warningAlert("请输入密码");
+        return;
+      }
+      if (this.form.roleid == 1) {
+        warningAlert("请选择角色");
+        return;
+      }
       requestGuanliyuanAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -115,6 +127,10 @@ export default {
       });
     },
     update() {
+      if (!this.$regBlank.test(this.form.username)) {
+        warningAlert("不能修改空用户");
+        return;
+      }
       requestGuanliyuanEdit(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

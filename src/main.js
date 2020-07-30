@@ -28,10 +28,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI)
 
 
+//引入空格正则
+import {regBlank} from './utils/reg'
+Vue.prototype.$regBlank = regBlank
 
 
-
-Vue.prototype.$imgPre = 'http://localhost:3000'
+Vue.prototype.$imgPre = ''
 
 import './assets/css/reset.css'
 /* eslint-disable no-new */

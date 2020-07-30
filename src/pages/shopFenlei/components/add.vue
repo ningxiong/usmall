@@ -99,7 +99,7 @@ export default {
         img: "",
         status: 1,
       };
-      this.imageUrl = ''
+      this.imageUrl = "";
       this.$message({
         message: "取消",
         type: "info",
@@ -107,6 +107,16 @@ export default {
     },
     //点击添加
     add() {
+      if (!this.$regBlank.test(this.form.catename)) {
+        warningAlert("请输入分类名称");
+        return;
+      }
+      if (this.form.pid != 0) {
+        if (!this.$regBlank.test(this.form.img)) {
+          warningAlert("请上传图片");
+          return;
+        }
+      }
       requestFenleiAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -136,6 +146,10 @@ export default {
       });
     },
     update() {
+      if (!this.$regBlank.test(this.form.catename)) {
+        warningAlert("不能设置空白分类");
+        return;
+      }
       requestFenleiEdit(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
