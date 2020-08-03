@@ -33,7 +33,7 @@ import {regBlank} from './utils/reg'
 Vue.prototype.$regBlank = regBlank
 
 
-Vue.prototype.$imgPre = ''
+Vue.prototype.$imgPre = 'http://localhost:3000'
 
 import './assets/css/reset.css'
 /* eslint-disable no-new */
